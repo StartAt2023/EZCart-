@@ -13,13 +13,22 @@ console.log('PORT:', process.env.PORT);
 
 const app = express();
 
+// CORS 配置
+const corsOptions = {
+  origin: ['http://localhost:5173', 'http://localhost:3000'], // 允许的前端域名
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+
 // 连接数据库
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Could not connect to MongoDB:', err));
 
 // 中间件
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
