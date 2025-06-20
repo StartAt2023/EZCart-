@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
 
 // 加载环境变量
 dotenv.config();
@@ -34,6 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // 路由
 app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
 
 // 基础路由
 app.get('/', (req, res) => {
